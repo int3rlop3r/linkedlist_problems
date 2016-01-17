@@ -1,4 +1,4 @@
-Linked List Problems - Solutoins
+Linked List Problems - Solutions
 =================================
 
 Solutions to problems at -
