@@ -3,6 +3,7 @@
 
 #include "ll.h"
 
+/* creates a basic linked list with default values */
 struct node* build_new() {
     struct node* head = NULL;
     struct node* second = NULL;
@@ -24,7 +25,8 @@ struct node* build_new() {
     return head;
 }
 
-void append(struct node** list, int data) {
+/* appends a values to a linked list */
+void lappend(struct node** list, int data) {
     struct node* tmp_node = *list;
     struct node* new_node = malloc(sizeof(struct node));
 
@@ -43,7 +45,8 @@ void append(struct node** list, int data) {
     tmp_node->next = new_node;
 }
 
-void push(struct node** list, int data) {
+/* pushes a value onto a linked list */
+void lpush(struct node** list, int data) {
     struct node* new_node = malloc(sizeof(struct node));
 
     new_node->data = data;
@@ -51,11 +54,13 @@ void push(struct node** list, int data) {
     *list = new_node;
 }
 
-int insert(struct node** list, int position, int data) {
+/* inserts a value at the specified position of
+ * the linked list */
+int linsert(struct node** list, int position, int data) {
     struct node* tmp_node = NULL;
 
     if (position == 0) {
-        push(list, data);
+        lpush(list, data);
         return 0;
     }
 
@@ -74,7 +79,8 @@ int insert(struct node** list, int position, int data) {
     return -1;
 }
 
-void print_elements(struct node* mylist) {
+/* print out all the elements of the linked list */
+void lprint(struct node* mylist) {
     struct node* tmp_node = mylist;
 
     while (tmp_node != NULL) {
@@ -84,7 +90,8 @@ void print_elements(struct node* mylist) {
     printf("\n");
 }
 
-int list_len(struct node* list) {
+/* get the length of the list */
+int llen(struct node* list) {
     struct node* tmp_node = NULL;
     int counter = 0;
 
@@ -95,19 +102,57 @@ int list_len(struct node* list) {
     return counter;
 }
 
-int get_data_at(struct node* list, int index) {
+/* get the count of occurences of 'needle' */
+int lcount(struct node* head, int needle) {
+    int counter = 0;
+    while (head != NULL) {
+        if (head->data == needle)
+            counter++;
+        head = head->next;
+    }
+    
+    return counter;
+}
+
+/* get data at the specified position */
+int lget(struct node* list, int index) {
     struct node* tmp = list;
     int counter = 0;
 
-    while (list != NULL) {
-
+    while (tmp != NULL) {
         if (counter == index)
-            return list->data;
-        
+            return tmp->data;
+
         counter++;
-        list = list->next;
+        tmp = tmp->next;
     }
 
     return -1;
 }
 
+/* deletes the entire linked list */
+void ldelete(struct node** list) {
+    struct node* tmp_list = *list;
+    struct node* dummy_node;
+
+    while (tmp_list != NULL) {
+        dummy_node = tmp_list;
+        tmp_list = tmp_list->next;
+        free(dummy_node->next);
+        dummy_node->next = NULL;
+    }
+
+    /* free up the head */
+    free(*list);
+    *list = NULL;
+}
+
+/* pops an element off the list */
+int lpop(struct node** list) {
+    struct node* tmp_list = *list;
+    int data = tmp_list->data;
+    *list = tmp_list->next;
+    free(tmp_list);
+
+    return data;
+}

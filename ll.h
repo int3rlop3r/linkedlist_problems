@@ -8,17 +8,23 @@ struct node {
 
 struct node* build_new();
 
-void append(struct node** list, int data);
+void lappend(struct node** list, int data);
 
-void push(struct node** list, int data);
+void lpush(struct node** list, int data);
 
-int insert(struct node** list, int position, int data);
+int linsert(struct node** list, int position, int data);
 
-void print_elements(struct node* mylist);
+void lprint(struct node* mylist);
 
-int list_len(struct node* list);
+int llen(struct node* list);
 
-int get_data_at(struct node* list, int index);
+int lget(struct node* list, int index);
+
+int lcount(struct node* head, int needle);
+
+void ldelete(struct node** list);
+
+int lpop(struct node** list);
 
 #endif
 

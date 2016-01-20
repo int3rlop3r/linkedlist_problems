@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 #include "ll.h"
 
@@ -8,45 +9,67 @@ void test_ll() {
     mylist = malloc(sizeof(struct node));
 
     mylist = build_new();
-    push(&mylist, 4);
-    append(&mylist, 5);
-    print_elements(mylist);
-    insert(&mylist, 5, 7);
+    lpush(&mylist, 4);
+    lappend(&mylist, 5);
+    lprint(mylist);
+    linsert(&mylist, 5, 7);
 
-    print_elements(mylist);
-    int len = list_len(mylist);
+    lprint(mylist);
+    int len = llen(mylist);
     printf("Length of the list: %d\n", len);
 }
 
-int count_instances(struct node* head, int needle) {
-    int counter = 0;
-    while (head != NULL) {
-        if (head->data == needle)
-            counter++;
-        head = head->next;
-    }
-    return counter;
-}
-
-void test_count_instances() {
+void test_lcount() {
+    puts("Running Question 1");
     struct node* mylist = build_new();
-    push(&mylist, 2);
-    push(&mylist, 2);
+    lpush(&mylist, 2);
+    lpush(&mylist, 2);
     int needle = 2;
-    int instances = count_instances(mylist, needle);
-
-    printf("count of %d: %d\n", needle, instances);
+    int instances = lcount(mylist, needle);
+    assert(instances == 3);
+    puts("Passed");
 }
 
-void test_getNth() {
+void test_getnth() {
+    puts("Running Question 2");
     int index = 1;
     struct node* mylist = build_new();
-    int data = get_data_at(mylist, index);
-    printf("data at %d: %d\n", index, data);
+    int data = lget(mylist, index);
+    assert(data == 2);
+    puts("Passed");
+}
+
+void test_delete_list() {
+    puts("Running Question 3");
+    struct node* mylist = build_new();
+    int ll = llen(mylist);
+    assert(ll == 3);
+    ldelete(&mylist);
+    ll = llen(mylist);
+    assert(ll == 0);
+    puts("Passed");
+}
+
+void test_lpop() {
+    puts("Running Question 4");
+    struct node* mylist = build_new();
+    int ll = llen(mylist);
+    int data = lpop(&mylist);
+    assert(data == 1);
+    data = lpop(&mylist);
+    assert(data == 2);
+    data = lpop(&mylist);
+    assert(data == 3);
+    ll = llen(mylist);
+    assert(ll == 0);
+    puts("Passed");
 }
 
 int main() {
     puts("All problems will be solved here !!");
-    test_getNth();
+    test_lcount();
+    test_getnth();
+    test_delete_list();
+    test_lpop();
     return 0;
 }
