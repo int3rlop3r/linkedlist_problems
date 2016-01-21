@@ -59,7 +59,13 @@ void lpush(struct node** list, int data) {
 int linsert(struct node** list, int position, int data) {
     struct node* tmp_node = NULL;
 
-    if (position == 0) {
+    if (list == NULL && position == 0) {
+        tmp_node = *list;
+        tmp_node = malloc(sizeof(struct node));
+        tmp_node->data = data;
+        tmp_node->next = NULL;
+        return 0;
+    } else if (position == 0) {
         lpush(list, data);
         return 0;
     }

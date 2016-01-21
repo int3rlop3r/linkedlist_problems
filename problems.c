@@ -19,7 +19,7 @@ void test_ll() {
     printf("Length of the list: %d\n", len);
 }
 
-void test_lcount() {
+void test_count() {
     puts("Running Question 1");
     struct node* mylist = build_new();
     lpush(&mylist, 2);
@@ -50,7 +50,7 @@ void test_delete_list() {
     puts("Passed");
 }
 
-void test_lpop() {
+void test_pop() {
     puts("Running Question 4");
     struct node* mylist = build_new();
     int ll = llen(mylist);
@@ -65,11 +65,28 @@ void test_lpop() {
     puts("Passed");
 }
 
+void test_insert() {
+    puts("Running Question 5");
+    struct node* mylist = NULL;
+    linsert(&mylist, 0, 13);
+    linsert(&mylist, 1, 42);
+    linsert(&mylist, 1, 5);
+    int ll = llen(mylist);
+    assert(ll == 3);
+    int data_at_1 = lget(mylist, 1);
+    assert(data_at_1 == 5);
+    ldelete(&mylist);
+    ll = llen(mylist);
+    assert(ll == 0);
+    puts("Passed");
+}
+
 int main() {
     puts("All problems will be solved here !!");
-    test_lcount();
+    test_count();
     test_getnth();
     test_delete_list();
-    test_lpop();
+    test_pop();
+    test_insert();
     return 0;
 }
