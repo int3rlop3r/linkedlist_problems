@@ -5,8 +5,8 @@
 #include "ll.h"
 
 void test_ll() {
-    struct node* mylist = NULL;
-    mylist = malloc(sizeof(struct node));
+    struct node *mylist = NULL;
+    mylist = (struct node *) malloc(sizeof(struct node));
 
     mylist = build_new();
     lpush(&mylist, 4);
@@ -21,11 +21,12 @@ void test_ll() {
 
 void test_count() {
     puts("Running Question 1");
-    struct node* mylist = build_new();
+    struct node *mylist = build_new();
     lpush(&mylist, 2);
     lpush(&mylist, 2);
     int needle = 2;
-    int instances = lcount(mylist, needle);
+    int instances;
+    instances = lcount(mylist, needle);
     assert(instances == 3);
     puts("Passed");
 }
@@ -33,15 +34,16 @@ void test_count() {
 void test_getnth() {
     puts("Running Question 2");
     int index = 1;
-    struct node* mylist = build_new();
-    int data = lget(mylist, index);
+    struct node *mylist = build_new();
+    int data;
+    data = lget(mylist, index);
     assert(data == 2);
     puts("Passed");
 }
 
 void test_delete_list() {
     puts("Running Question 3");
-    struct node* mylist = build_new();
+    struct node *mylist = build_new();
     int ll = llen(mylist);
     assert(ll == 3);
     ldelete(&mylist);
@@ -52,7 +54,7 @@ void test_delete_list() {
 
 void test_pop() {
     puts("Running Question 4");
-    struct node* mylist = build_new();
+    struct node *mylist = build_new();
     int ll = llen(mylist);
     int data = lpop(&mylist);
     assert(data == 1);
@@ -73,7 +75,8 @@ void test_insert() {
     linsert(&mylist, 1, 5);
     int ll = llen(mylist);
     assert(ll == 3);
-    int data_at_1 = lget(mylist, 1);
+    int data_at_1;
+    data_at_1 = lget(mylist, 1);
     assert(data_at_1 == 5);
     ldelete(&mylist);
     ll = llen(mylist);

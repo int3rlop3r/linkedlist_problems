@@ -4,14 +4,14 @@
 #include "ll.h"
 
 /* creates a basic linked list with default values */
-struct node* build_new() {
-    struct node* head = NULL;
-    struct node* second = NULL;
-    struct node* third = NULL;
+struct node *build_new() {
+    struct node *head = NULL;
+    struct node *second = NULL;
+    struct node *third = NULL;
 
-    head = malloc(sizeof(struct node));
-    second = malloc(sizeof(struct node));
-    third = malloc(sizeof(struct node));
+    head = (struct node *) malloc(sizeof(struct node));
+    second = (struct node *) malloc(sizeof(struct node));
+    third = (struct node *) malloc(sizeof(struct node));
 
     head->data = 1;
     head->next = second;
@@ -27,8 +27,8 @@ struct node* build_new() {
 
 /* appends a values to a linked list */
 void lappend(struct node** list, int data) {
-    struct node* tmp_node = *list;
-    struct node* new_node = malloc(sizeof(struct node));
+    struct node *tmp_node = *list;
+    struct node *new_node = (struct node *) malloc(sizeof(struct node));
 
     new_node->data = data;
     new_node->next = NULL;
@@ -46,8 +46,8 @@ void lappend(struct node** list, int data) {
 }
 
 /* pushes a value onto a linked list */
-void lpush(struct node** list, int data) {
-    struct node* new_node = malloc(sizeof(struct node));
+void lpush(struct node **list, int data) {
+    struct node *new_node = (struct node *) malloc(sizeof(struct node));
 
     new_node->data = data;
     new_node->next = *list;
@@ -56,12 +56,12 @@ void lpush(struct node** list, int data) {
 
 /* inserts a value at the specified position of
  * the linked list */
-int linsert(struct node** list, int position, int data) {
-    struct node* tmp_node = NULL;
+int linsert(struct node **list, int position, int data) {
+    struct node *tmp_node = NULL;
 
     if (list == NULL && position == 0) {
         tmp_node = *list;
-        tmp_node = malloc(sizeof(struct node));
+        tmp_node = (struct node *) malloc(sizeof(struct node));
         tmp_node->data = data;
         tmp_node->next = NULL;
         return 0;
@@ -71,7 +71,7 @@ int linsert(struct node** list, int position, int data) {
     }
 
     int counter = 1;
-    struct node* new_node = malloc(sizeof(struct node));
+    struct node *new_node = (struct node *) malloc(sizeof(struct node));
 
     for (tmp_node = *list; tmp_node != NULL; tmp_node = tmp_node->next, counter++) {
         if (counter == position) {
@@ -86,8 +86,8 @@ int linsert(struct node** list, int position, int data) {
 }
 
 /* print out all the elements of the linked list */
-void lprint(struct node* mylist) {
-    struct node* tmp_node = mylist;
+void lprint(struct node *mylist) {
+    struct node *tmp_node = mylist;
 
     while (tmp_node != NULL) {
         printf("%d ", tmp_node->data);
@@ -97,8 +97,8 @@ void lprint(struct node* mylist) {
 }
 
 /* get the length of the list */
-int llen(struct node* list) {
-    struct node* tmp_node = NULL;
+int llen(struct node *list) {
+    struct node *tmp_node = NULL;
     int counter = 0;
 
     for (tmp_node = list; tmp_node != NULL; tmp_node = tmp_node->next) {
@@ -109,7 +109,7 @@ int llen(struct node* list) {
 }
 
 /* get the count of occurences of 'needle' */
-int lcount(struct node* head, int needle) {
+int lcount(struct node *head, int needle) {
     int counter = 0;
     while (head != NULL) {
         if (head->data == needle)
@@ -121,8 +121,8 @@ int lcount(struct node* head, int needle) {
 }
 
 /* get data at the specified position */
-int lget(struct node* list, int index) {
-    struct node* tmp = list;
+int lget(struct node *list, int index) {
+    struct node *tmp = list;
     int counter = 0;
 
     while (tmp != NULL) {
@@ -137,9 +137,9 @@ int lget(struct node* list, int index) {
 }
 
 /* deletes the entire linked list */
-void ldelete(struct node** list) {
-    struct node* tmp_list = *list;
-    struct node* dummy_node;
+void ldelete(struct node **list) {
+    struct node *tmp_list = *list;
+    struct node *dummy_node;
 
     while (tmp_list != NULL) {
         dummy_node = tmp_list;
@@ -155,7 +155,7 @@ void ldelete(struct node** list) {
 
 /* pops an element off the list */
 int lpop(struct node** list) {
-    struct node* tmp_list = *list;
+    struct node *tmp_list = *list;
     int data = tmp_list->data;
     *list = tmp_list->next;
     free(tmp_list);

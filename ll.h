@@ -3,28 +3,28 @@
 
 struct node {
     int data;
-    struct node* next;
+    struct node *next;
 };
 
-struct node* build_new();
+struct node *build_new();
 
-void lappend(struct node** list, int data);
+void lappend(struct node **list, int data);
 
-void lpush(struct node** list, int data);
+void lpush(struct node **list, int data);
 
-int linsert(struct node** list, int position, int data);
+int linsert(struct node **list, int position, int data);
 
-void lprint(struct node* mylist);
+void lprint(struct node *mylist);
 
-int llen(struct node* list);
+int llen(struct node *list);
 
-int lget(struct node* list, int index);
+int lget(struct node *list, int index);
 
-int lcount(struct node* head, int needle);
+int lcount(struct node *head, int needle);
 
-void ldelete(struct node** list);
+void ldelete(struct node **list);
 
-int lpop(struct node** list);
+int lpop(struct node **list);
 
 #endif
 
