@@ -69,7 +69,7 @@ void test_pop() {
 
 void test_insert() {
     puts("Running Question 5");
-    struct node* mylist = NULL;
+    struct node *mylist = NULL;
     linsert(&mylist, 0, 13);
     linsert(&mylist, 1, 42);
     linsert(&mylist, 1, 5);

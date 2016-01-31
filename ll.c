@@ -26,7 +26,7 @@ struct node *build_new() {
 }
 
 /* appends a values to a linked list */
-void lappend(struct node** list, int data) {
+void lappend(struct node **list, int data) {
     struct node *tmp_node = *list;
     struct node *new_node = (struct node *) malloc(sizeof(struct node));
 
@@ -154,7 +154,7 @@ void ldelete(struct node **list) {
 }
 
 /* pops an element off the list */
-int lpop(struct node** list) {
+int lpop(struct node **list) {
     struct node *tmp_list = *list;
     int data = tmp_list->data;
     *list = tmp_list->next;
