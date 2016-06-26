@@ -1,5 +1,5 @@
 Linked List Problems - Solutions
 =================================
 
-Solutions to problems at -
+An attempt at solving linked list problems (in C) at -
 http://cslibrary.stanford.edu/105/LinkedListProblems.pdf
