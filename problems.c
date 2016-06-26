@@ -84,6 +84,25 @@ void test_insert() {
     puts("Passed");
 }
 
+void test_sorted_insert() {
+    puts("Running Question 6");
+    struct node *mylist = NULL;
+    lpush(&mylist, 5);
+    lpush(&mylist, 4);
+    lpush(&mylist, 2);
+    lpush(&mylist, 1);
+    struct node *new_node;
+    new_node = (struct node *) malloc(sizeof(struct node));
+    new_node->data = 3;
+    new_node->next = NULL;
+    lsorted_insert(&mylist, new_node);
+    int ll = llen(mylist);
+    assert(ll == 5);
+    int data = lget(mylist, 2);
+    assert(data == 3);
+    puts("Passed");
+}
+
 int main() {
     puts("All problems will be solved here !!");
     test_count();
@@ -91,5 +110,6 @@ int main() {
     test_delete_list();
     test_pop();
     test_insert();
+    test_sorted_insert();
     return 0;
 }

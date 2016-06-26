@@ -138,27 +138,42 @@ int lget(struct node *list, int index) {
 
 /* deletes the entire linked list */
 void ldelete(struct node **list) {
-    struct node *tmp_list = *list;
     struct node *dummy_node;
 
-    while (tmp_list != NULL) {
-        dummy_node = tmp_list;
-        tmp_list = tmp_list->next;
-        free(dummy_node->next);
-        dummy_node->next = NULL;
+    while(*list != NULL) {
+        dummy_node = *list;
+        *list = (*list)->next;
+        free(dummy_node);
     }
-
-    /* free up the head */
-    free(*list);
-    *list = NULL;
 }
 
 /* pops an element off the list */
 int lpop(struct node **list) {
-    struct node *tmp_list = *list;
-    int data = tmp_list->data;
-    *list = tmp_list->next;
-    free(tmp_list);
+    int data = (*list)->data;
+    *list = (*list)->next;
 
     return data;
 }
+
+/*an ordered insert*/
+int lsorted_insert(struct node **list, struct node *elem) {
+    struct node *tmp_list;
+    struct node *prev_node;
+    if (*list == NULL || elem == NULL)
+        return -1;
+
+    for(tmp_list = *list; tmp_list != NULL; tmp_list = tmp_list->next) {
+        if (tmp_list->data >= elem->data) {
+            prev_node->next = elem;
+            elem->next = tmp_list;
+            break;
+        }
+        /*save the prev node*/
+        prev_node = tmp_list;
+    }
+
+    return 0;
+}
+
+
+
