@@ -141,39 +141,62 @@ void ldelete(struct node **list) {
     struct node *dummy_node;
 
     while(*list != NULL) {
-        dummy_node = *list;
-        *list = (*list)->next;
-        free(dummy_node);
+        dummy_node = (*list)->next;
+        free(*list);
+        *list = dummy_node;
     }
 }
 
 /* pops an element off the list */
 int lpop(struct node **list) {
     int data = (*list)->data;
-    *list = (*list)->next;
+    struct node *tmp = (*list)->next;
+    free(*list);
+    *list = tmp;
 
     return data;
 }
 
 /*an ordered insert*/
-int lsorted_insert(struct node **list, struct node *elem) {
+void lsorted_insert(struct node **list, struct node *elem) {
     struct node *tmp_list;
-    struct node *prev_node;
-    if (*list == NULL || elem == NULL)
-        return -1;
+    struct node *prev_node = NULL;
+    struct node *elem_prev_node = NULL;
+    int elem_prev_set = 0;
+    int sorted = 0;
+
+    /*if the element was at the head*/
+    if (*list == elem) {
+        *list = (*list)->next;
+        elem_prev_set = 1;
+    }
 
     for(tmp_list = *list; tmp_list != NULL; tmp_list = tmp_list->next) {
-        if (tmp_list->data >= elem->data) {
+
+        if (elem == tmp_list)
+            elem_prev_set = 1;
+
+        if (!elem_prev_set)
+            elem_prev_node = tmp_list;
+
+        if (elem->data < tmp_list->data) {
+            if (elem_prev_node != NULL)
+                elem_prev_node->next = elem_prev_node->next->next;
+
             prev_node->next = elem;
             elem->next = tmp_list;
-            break;
+            sorted = 1;
         }
-        /*save the prev node*/
+
         prev_node = tmp_list;
     }
 
-    return 0;
+    /*if element was the largest on in the list*/
+    if (!sorted) {
+        if (elem_prev_node != NULL)
+            elem_prev_node->next = elem_prev_node->next->next;
+        prev_node->next = elem;
+        elem->next = NULL;
+    }
 }
-
-
 

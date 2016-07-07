@@ -87,19 +87,67 @@ void test_insert() {
 void test_sorted_insert() {
     puts("Running Question 6");
     struct node *mylist = NULL;
+    int ll = 0;
+    int elem;
+
+    /*when elem has to be added at the end*/
+    lpush(&mylist, 8);
+    lpush(&mylist, 6);
     lpush(&mylist, 5);
     lpush(&mylist, 4);
-    lpush(&mylist, 2);
+    lpush(&mylist, 9);
     lpush(&mylist, 1);
-    struct node *new_node;
-    new_node = (struct node *) malloc(sizeof(struct node));
-    new_node->data = 3;
-    new_node->next = NULL;
-    lsorted_insert(&mylist, new_node);
-    int ll = llen(mylist);
-    assert(ll == 5);
-    int data = lget(mylist, 2);
-    assert(data == 3);
+
+    lsorted_insert(&mylist, mylist->next);
+    ll = llen(mylist);
+    assert(ll == 6);
+    assert(lget(mylist, 1) == 4); // starts with zero
+    assert(lget(mylist, 5) == 9); // starts with zero
+
+    /*when elem lands up somewhere in between*/
+    struct node *mylist2 = NULL;
+    lpush(&mylist2, 8);
+    lpush(&mylist2, 6);
+    lpush(&mylist2, 5);
+    lpush(&mylist2, 4);
+    lpush(&mylist2, 7);
+    lpush(&mylist2, 1);
+
+    lsorted_insert(&mylist2, mylist2->next);
+    ll = llen(mylist);
+    assert(ll == 6);
+    assert(lget(mylist2, 1) == 4); // starts with zero
+    assert(lget(mylist2, 4) == 7); // starts with zero
+
+    /*when elem lands up at the start*/
+    struct node *mylist3 = NULL;
+    lpush(&mylist3, 8);
+    lpush(&mylist3, 6);
+    lpush(&mylist3, 5);
+    lpush(&mylist3, 4);
+    lpush(&mylist3, 1);
+    lpush(&mylist3, 7);
+
+    lsorted_insert(&mylist3, mylist3);
+    ll = llen(mylist);
+    assert(ll == 6);
+    assert(lget(mylist3, 0) == 1); // starts with zero
+    assert(lget(mylist3, 4) == 7); // starts with zero
+
+    /*when elem lands up at the start but has to be placed at the end*/
+    struct node *mylist4 = NULL;
+    lpush(&mylist4, 8);
+    lpush(&mylist4, 6);
+    lpush(&mylist4, 5);
+    lpush(&mylist4, 4);
+    lpush(&mylist4, 1);
+    lpush(&mylist4, 9);
+
+    lsorted_insert(&mylist4, mylist4);
+    ll = llen(mylist);
+    assert(ll == 6);
+    assert(lget(mylist4, 0) == 1); // starts with zero
+    assert(lget(mylist4, 5) == 9); // starts with zero
     puts("Passed");
 }
 
@@ -111,5 +159,6 @@ int main() {
     test_pop();
     test_insert();
     test_sorted_insert();
+    /*test_insert_sort();*/
     return 0;
 }

@@ -26,7 +26,8 @@ void ldelete(struct node **list);
 
 int lpop(struct node **list);
 
-int lsorted_insert(struct node **list, struct node *elem);
+void lsorted_insert(struct node **list, struct node *elem);
+
+void linsert_sort(struct node **list);
 
 #endif
-
